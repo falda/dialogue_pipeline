@@ -1,0 +1,91 @@
+Évaluation — Mission 1 / Scène 1 / v2
+Date : 2026-05-11
+Fichier évalué : /mnt/user-data/uploads/mission1_scene1_v2.ink
+Évaluateur : IA (Claude, conversation Incognito)
+
+Validation technique
+
+Inky : PASS — la syntaxe est valide, les knots sont accessibles, les diverts cohérents. Deux remarques : player_name est utilisé dans Reponse_* et Fin_Interrogatoire mais n'est jamais affecté dans le fichier (l'affectation est implicitement déléguée à Unity, signalée par le commentaire ligne 36) ; player_age est déclaré et jamais utilisé.
+Formatage : PASS — indentation et convention de nommage des knots cohérentes (snake_case). L'attribution des répliques repose entièrement sur la narration environnante, sans étiquettes locuteur : c'est lisible mais fragile (cf. ambiguïté ligne 9 traitée dans les Issues).
+Langue : PASS avec réserve — un typo confirmé ligne 178 : « la-bàs » au lieu de « là-bas » (accent grave mal placé). Pas d'autre faute majeure repérée. Ponctuation typographique propre (apostrophes courbes constantes).
+
+
+Score
+1. Cohérence narrative (/40)
+
+Objectifs de la scène : 7/10 — la faille, la bureaucratie de surface, le ton et l'irréversibilité de la descente sont tous introduits. Le caractère « procédure administrative » est porté par la diction du fonctionnaire. En revanche, la contrainte « les informations doivent être implicites autant que possible » (scenario) est tenue dans la première moitié mais cède dans Comment_ca, qui rend explicite le système de chantage interne du fonctionnaire.
+Cohérence du lore : 6/10 — le registre de surface est respecté (vouvoiement, vocabulaire administratif). Aucun terme interdit du lexique repéré. Deux frictions : (1) dans Reponse_Savoir (« rien en bas que vous ne sachiez déjà ») et Reponse_Silence (« rien que la mort là-bas »), le fonctionnaire se prononce sur ce qu'il y a au fond, ce que sa fiche interdit explicitement (« Il ne se prononce pas sur ce qu'il y a en bas »). (2) Le mot « abîme », identifié dans world_lexicon.md et jean_dubois.md comme marqueur signature de son registre, n'apparaît pas (« là-bas » est utilisé à la place).
+Cohérence des personnages : 6/10 — Jean Dubois est juste sur le cœur : calme, vouvoiement permanent, ironie froide, deux répliques signatures présentes (« Notre invité mérite mieux que ça » l. 23 ; « Je vous dis adieu » l. 209). Trois écarts : (a) « Enfin... rien qu'il ne puisse supporter » (l. 108) flirte avec le sadisme explicite, contre la directive « ne doit pas sembler sadique ou caricatural » ; (b) Comment_ca lui fait verbaliser son propre mécanisme institutionnel sur 4 phrases, ce qui contredit sa retenue caractéristique ; (c) le sourire ligne 207 + « mort certaine » donne une coloration plus théâtrale que la « politesse glaçante d'O'Brien » visée. Le protagoniste, lui, est conforme à sa fiche (court, observateur, accepte).
+Contrôle de l'information : 6/10 — beaucoup de choses restent opacifiées (ce qu'il y a au fond, pourquoi la descente, l'organisation politique). Mais Comment_ca est un bloc d'exposition déguisé : le fonctionnaire explique au joueur, à travers le protagoniste, son propre fonctionnement criminel. C'est exactement la configuration que dialogue_style_guide.md proscrit (« personnages expliquant naturellement des informations qu'ils connaissent déjà »).
+
+Sous-total : 25/40
+2. Qualité d'écriture (/40)
+
+Naturel des dialogues : 7/10 — globalement crédible, vouvoiement maîtrisé, transitions souples. Quelques formulations un peu sentencieuses (« Il n'existe aucun endroit où l'on échappe aux conséquences de ses actes », « La curiosité est un vilain défaut ») relèvent plus de l'aphorisme que du dialogue. Acceptable pour un personnage O'Brien-esque, mais leur accumulation alourdit.
+Sous-texte : 6/10 — bien tenu sur les répliques signatures (« Notre invité mérite mieux » fonctionne parfaitement comme menace polie ; le triptyque pause/sourire/adieu en clôture aussi). En revanche, plusieurs lignes sapent leur propre sous-texte en le disant : Comment_ca énonce ce qui devrait rester sous-entendu ; les réponses de motivation commentent les motivations du joueur de façon assez directe.
+Rythme : 7/10 — structure de hub (Questions) lisible. Phrases courtes, retours de chariot bien employés. Deux points de friction : (a) Pourquoi_traitement ne propose qu'une seule sous-option + [Utile ?] qui n'est pas un vrai choix (progression forcée déguisée en choix) ; (b) dans Comment_ca, la réplique « De quel genre de service ? » (l. 95) est attribuée au protagoniste mais n'est pas formulée comme un choix, alors que tous les autres relais joueur passent par [brackets]. Incohérence de la grammaire interactive.
+Impact émotionnel : 7/10 — player_experience.md demande « malaise, tension calme, inhumanité administrative » ; la scène les délivre majoritairement. Le marqueur d'échec « le fonctionnaire paraît sadique → raté » est frôlé deux fois (la réplique sur le garde, le sourire final), sans franchir la ligne. Le marqueur d'échec « le joueur a envie de partir vite → atteint » est probablement obtenu.
+
+Sous-total : 27/40
+3. Design interactif (/20)
+
+Clarté des choix : 7/10 — les libellés du hub sont courts et lisibles ([Où suis-je ?], [Pourquoi ce traitement ?], [Le garde], [Pourquoi suis-je ici ?]). [Le garde] est le moins explicite (pas de verbe), mais reste compréhensible. Les 4 options de motivation sont nettement différenciées. La fausse option [Utile ?] (seul choix de son knot) est trompeuse en termes de clarté : elle promet un choix là où il n'y en a pas.
+Pertinence des choix : 6/10 — les choix de motivation sont l'enjeu majeur de la scène, et ils sont bien construits (4 attitudes distinctes, variable motivation stockée pour usage futur). Les choix du hub sont utiles narrativement mais purement informatifs : aucune trace persistante visible dans la scène, aucun « coût » de poser ou ne pas poser une question. Le choix unique de fin ([Le remercier]) est plus un bouton de sortie qu'un choix : l'absence d'alternative (silence, dernière question, refus poli) limite l'agentivité finale.
+
+Sous-total : 13/20
+Score global : 65/100
+
+Détection d'écriture IA
+Signaux observés, modérés :
+
+quelques formulations symétriques ou proverbiales (« Il n'existe aucun endroit où l'on échappe aux conséquences de ses actes » ; « La curiosité est un vilain défaut ») ;
+structure ternaire mécanique dans Le_garde (« Il m'est utile / Je ne compte pas lui faire de mal / Enfin... rien qu'il ne puisse supporter ») ;
+exposition lisse et bien rangée dans Comment_ca.
+
+Signaux absents : pas de sur-adjectivation, pas de verbalisation explicite des émotions des personnages, pas d'uniformité de voix (le protagoniste et le fonctionnaire ont des registres distincts).
+Globalement, l'écriture ne se lit pas comme un texte généré ; les marqueurs IA sont localisés sur 2-3 endroits identifiables.
+
+Critical Issues
+
+Le garde parle (ou ambiguïté insoluble). Ligne 9, « Entrez. » suit immédiatement « Le garde pousse la porte de la salle d'interrogatoire » et précède la description du fonctionnaire qui n'a pas encore levé les yeux. Le scénario impose explicitement : « Garde / Ne parle pas. ». Si « Entrez. » est destiné au fonctionnaire, l'enchaînement narratif rend cette lecture peu naturelle ; si c'est le garde, c'est une violation directe de la contrainte de la scène. À trancher.
+
+Major Issues
+
+Le fonctionnaire commente le fond de la faille dans deux réponses de motivation (Reponse_Savoir, Reponse_Silence), ce que sa fiche interdit explicitement. Cela contamine son rôle narratif (figure de l'indifférence procédurale) et risque d'orienter le joueur sur ce qu'il y a en bas avant même qu'il ne commence.
+Le knot Comment_ca fonctionne comme une scène d'exposition où le fonctionnaire détaille son propre dispositif de chantage interne. Contredit la fiche personnage (calme implicite, jamais explicite), la dialogue_style_guide.md (interdiction des personnages qui expliquent ce qu'ils savent déjà), et world_rules.md (« les informations doivent émerger par contexte, implication ou conflit »).
+Mot signature « abîme » absent. La fiche jean_dubois.md et world_lexicon.md posent ce mot comme marqueur clé du registre surface (« J'ai croisé beaucoup de fous mais c'est la première fois qu'on veut aller dans l'abîme »). La réplique équivalente du fichier (« je n'avais encore jamais rencontré quelqu'un cherchant volontairement à descendre là-bas », l. 117) en perd le marquage lexical.
+Pseudo-choix [Utile ?] dans Pourquoi_traitement. Une option unique présentée comme choix : dialogue_style_guide.md proscrit explicitement les « faux choix ». À transformer en relais narratif sans bracket, ou à doter d'au moins une alternative.
+Glissement vers le sadisme caricatural. La réplique « Enfin... rien qu'il ne puisse supporter » (l. 108) et le sourire + « mort certaine » de clôture (l. 205-207) frôlent le marqueur d'échec « le fonctionnaire paraît sadique » défini dans player_experience.md.
+
+Minor Issues
+
+Typo ligne 178 : « la-bàs » → « là-bas ».
+Grammaire interactive incohérente dans Comment_ca : « De quel genre de service ? » (l. 95) est attribué au protagoniste mais n'est pas formalisé comme choix [...], contrairement à toutes les autres prises de parole du joueur dans la scène.
+Variable player_age déclarée et jamais consommée.
+player_name jamais initialisé dans le fichier ; à documenter explicitement (commentaire) si l'affectation passe par Unity, pour éviter qu'une exécution Ink standalone n'affiche Monsieur  avec un blanc.
+Choix + en hub : tous les choix du hub Questions sont persistants (+), donc rejouables. À vérifier que c'est l'intention (utile pour exploration, gênant si on craint un effet « le PJ reposerait la même question »).
+Choix unique final [Le remercier] : fonctionne mais réduit l'agentivité du joueur à un bouton de validation.
+
+Strengths
+
+Architecture du hub Questions : structure claire, lisible, conforme à l'esprit roue Mass Effect 2/3 visé par la fiche personnage.
+Répliques signatures préservées : « Notre invité mérite mieux que ça » et « Je vous dis adieu, Monsieur » sont là où elles doivent être et fonctionnent.
+Les quatre options de motivation sont distinctes (fuite / quête / savoir / silence), couvrent un spectre psychologique large, et chacune reçoit une réponse adaptée du fonctionnaire (la plus réussie étant Reponse_Quete : la question retour « Cette personne souhaite-t-elle réellement vous revoir ? » est un excellent sous-texte).
+Voix du protagoniste tenue : courte, observatrice, jamais ironique ni héroïque ; conforme à protagonist.md.
+Vocabulaire de surface globalement respecté : registre administratif, vouvoiement permanent, aucun terme interdit du lexique repéré dans le corps du dialogue.
+Politesse comme arme : la mécanique principale du personnage (politesse retournée en menace) fonctionne sur plusieurs lignes, en particulier la scène d'ouverture (menottes / « notre invité ») et la chute (« Ne me remerciez pas »).
+
+Suggested Improvements
+Par priorité décroissante :
+
+Trancher l'ambiguïté du locuteur de « Entrez. » Soit attribuer explicitement la ligne au fonctionnaire (avec ajustement de l'ordre narratif), soit la supprimer si la contrainte « le garde ne parle pas » prévaut. Sans clarification, c'est un Critical bloquant.
+Retirer ou voiler les commentaires du fonctionnaire sur le fond de la faille dans Reponse_Savoir et Reponse_Silence. Direction à explorer : remplacer une affirmation sur le fond par une affirmation sur le protagoniste lui-même, ou par un silence ironique. Le fonctionnaire ne sait rien du fond, et c'est précisément ce qui doit transparaître.
+Refondre Comment_ca pour le faire reposer sur le sous-entendu. La direction à explorer est : laisser le fonctionnaire poser le cadre (cette situation peut être utile) sans en détailler les rouages. Le joueur doit comprendre par implication, pas par exposé.
+Réintroduire le mot « abîme » quelque part dans le dialogue du fonctionnaire, idéalement à la place du « là-bas » du moment où il évoque la singularité du protagoniste. C'est un marqueur lexical signature.
+Atténuer les deux glissements vers le sadisme caricatural : la phrase sur ce que le garde « peut supporter » et le sourire associé à la « mort certaine ». Direction à explorer : remplacer la menace voilée physique envers le garde par une menace voilée institutionnelle (le garde est compromis, pas blessé) ; et substituer au sourire un signe plus opaque (un geste, un silence, une formule polie sèche).
+Régler le pseudo-choix [Utile ?] : soit l'absorber en transition narrative sans bracket, soit doubler l'option d'une alternative qui justifie le format choix.
+Aligner la grammaire interactive de Comment_ca : si « De quel genre de service ? » est une réplique du protagoniste, la formaliser en [choix] comme partout ailleurs, ou la convertir en réflexion intérieure / narration.
+Envisager un second choix dans Fin_Interrogatoire. Le [Le remercier] est élégant comme conclusion mais isolé. Une alternative — par exemple, un choix de sortir sans rien dire — éviterait l'effet « bouton de validation » et offrirait une variation d'attitude finale au protagoniste.
+Corriger « la-bàs » → « là-bas » (ligne 178).
+Nettoyer les variables inutilisées (player_age) et documenter l'origine externe de player_name (commentaire au-dessus de la déclaration VAR).
+Réviser Choix_Motivation pour réduire la tendance proverbiale des réponses du fonctionnaire. Direction à explorer : faire que la réplique du fonctionnaire renvoie à un détail concret du dossier qu'il vient de consulter, plutôt qu'à un aphorisme moral.
