@@ -8,6 +8,14 @@
 - variables cohérentes
 - absence de boucle involontaire
 
+### Ink Conventions (cf. /global/ink_conventions.md)
+- toute réplique parlée porte un préfixe locuteur en majuscules suivi de `:`
+- les didascalies sont entre crochets `[...]` et ne contiennent jamais de réplique parlée
+- les identifiants de locuteurs utilisés figurent dans la liste autorisée
+- les variables déclarées sont consommées (pas de variable orpheline)
+- les knots et stitches respectent les conventions de nommage
+- aucun choix unique présenté avec `*` ou `+` (pas de faux choix)
+
 ### Formatting
 - structure lisible
 - indentation correcte

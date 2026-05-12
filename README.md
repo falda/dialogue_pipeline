@@ -20,6 +20,7 @@ Le GDD (`GDD_Labime_v*.txt`) reste la source de vérité du jeu. La pipeline org
   world_rules.md                règles du monde, lore, ton général
   world_lexicon.md              vocabulaire autorisé/interdit, périphrases
   player_experience.md          intentions émotionnelles attendues par acte/scène
+  ink_conventions.md            conventions d'écriture des fichiers .ink
   global.ink                    variables Ink partagées entre toutes les scènes
 
 /dialogues                      scénarios et dialogues, organisés par mission
@@ -41,7 +42,7 @@ Le GDD (`GDD_Labime_v*.txt`) reste la source de vérité du jeu. La pipeline org
 ## Boucle de travail
 
 1. **Scénario** — rédiger ou mettre à jour `scenario_*.md` (intention, contraintes, état émotionnel attendu).
-2. **Écriture** — produire le `.ink` à partir du scénario, des fiches personnages concernées, et des règles globales.
+2. **Écriture** — produire le `.ink` à partir du scénario, des fiches personnages concernées, des règles globales (`/global/*.md`) et des conventions Ink (`ink_conventions.md`).
 3. **Évaluation** — appliquer `evaluation_rubric.md`. Archiver le rapport dans `/evaluation/logs/`.
 4. **Itération** — version suivante intégrant les retours. Conserver l'ancienne version avec suffixe `_v2`, `_v3`, etc.
 
@@ -51,6 +52,6 @@ Le GDD (`GDD_Labime_v*.txt`) reste la source de vérité du jeu. La pipeline org
 
 - **Versionnage** : `mission1_scene1.ink` est la version courante. Les anciennes versions sont conservées sous `mission1_scene1_v2.ink`, `_v3.ink`, etc.
 - **Nommage de fichiers** : `snake_case`, en minuscules.
-- **Nommage des nœuds Ink** : `PascalCase` ou `Snake_Case_Avec_Majuscules` (à choisir et garder cohérent — actuellement mélangé).
+- **Nommage des nœuds Ink et autres règles Ink** : voir `/global/ink_conventions.md`.
 - **Variables Ink globales** : déclarées dans `global.ink`, jamais redéclarées localement.
 - **Source de vérité unique** : une information n'est qu'à un seul endroit. Si elle vient du GDD, la fiche personnage la résume avec un lien de référence, elle ne la duplique pas mot pour mot.
