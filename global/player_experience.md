@@ -1,116 +1,90 @@
 # Player Experience
 
-Boussole d'écriture. Définit ce que le joueur doit ressentir à chaque point du jeu.
+## Identité de surface (v0.4)
+- **Genre** : homme
+- **Âge** : 28-38 ans (adulte)
+- **Voix narrative** : modèle 2 (choix de répliques détaillés, type Disco Elysium)
+- **Interface dialogue** : roue de dialogue type Mass Effect 2/3, sans Paragon/Renegade
 
-Sert à deux choses :
-1. **Pendant l'écriture** — vérifier qu'un dialogue produit l'effet émotionnel attendu.
-2. **Pendant l'évaluation** — un des critères mesurés par `evaluation_rubric.md` (Emotional Impact).
+## Postulat de départ
+Le joueur descend volontairement dans l'abîme. Il a payé / soudoyé pour intégrer un convoi de condamnés. Il cherche quelque chose, défini par sa motivation initiale.
 
-Si une scène contredit l'intention émotionnelle décrite ici, c'est soit la scène qui doit changer, soit l'intention qui doit être révisée explicitement.
+## Modèle de personnage — Projection
+Le joueur ne joue pas un personnage prédéfini. Il crée le sien en répondant à une question dans la scène 1 (interrogatoire à la surface).
+
+## Les 4 motivations
+- **Le silencieux** — refuse de se justifier
+- **La quête personnelle** — il cherche quelqu'un
+- **La quête de savoir** — il veut comprendre ce qu'il y a en bas
+- **La fuite** — il échappe à quelque chose à la surface
+
+Chaque motivation déclenche un avertissement différent du fonctionnaire en fin de scène 1, et conditionne quatre versions du dialogue de l'entité en mission 10 (Acte III).
+
+## Secret du joueur — modèle mixte
+La **descente volontaire** reste cachée jusqu'à un moment scripté du récit. La **motivation précise** peut être révélée plus librement aux PNJs proches via choix de dialogue.
+
+## État psychologique initial du protagoniste (v0.7)
+- épuisé
+- détaché de la surface
+- cherche une forme de sens
+
+## Tendances
+- observe avant de parler
+- évite les conflits directs
+- curiosité dangereuse
+
+## Ce qu'il ne doit pas devenir
+- héros d'action classique
+- personnage cynique comique
+- personnage bavard
 
 ---
 
-## Principe général
-
-Le joueur incarne un homme qui descend volontairement dans la faille. État initial (cf. `protagonist.md`) : épuisé, détaché de la surface, cherche une forme de sens.
-
-L'arc émotionnel global suit une trajectoire **détachement → réinvestissement → effondrement → choix final**, en miroir des quatre actes.
-
-À aucun moment le joueur ne doit ressentir :
-- de toute-puissance héroïque
-- de comédie légère soutenue
-- d'évidence morale confortable
-
----
-
-## Arc émotionnel par acte
+## Parcours émotionnel attendu (par acte)
 
 ### Acte I — Émergence
-**Trajectoire** : du détachement froid à la première implication émotionnelle douloureuse.
+Le joueur est étranger, observateur. Il subit ou suit (pas de tableau de contrats, missions du mentor ou événements ville). Il s'illustre par accident à la mission climactique. Reçoit le surnom "héros de la brèche".
 
-| Phase | Intention émotionnelle |
-|-------|------------------------|
-| Scène 1 (interrogatoire surface) | Malaise, tension calme, inhumanité administrative |
-| Descente et arrivée | Irréversibilité, vertige, fascination contenue |
-| Mission tutoriel (donjon) | Brutalité de la perte, impuissance, premier deuil |
-| Rencontre du mentor | Réchauffement humain inattendu — première brèche dans le détachement |
-| Missions 2-3 | Reconquête lente d'un sens de l'agentivité, mais sous tutelle |
-| Mission 4 (climax) | Désobéissance lourde, peur réelle, deuil du mentor |
-| Conseil de crise post-mission 4 | Étourdissement — devenir « le héros de la brèche » sans l'avoir choisi |
+Émotions visées : malaise, irréversibilité, vertige, curiosité contenue, premier deuil (mentor).
 
-**À ne pas produire** : sentiment héroïque triomphal après mission 4. La victoire est sale et coûteuse.
+### Transition Acte I → II
+Reconnaissance. Conseil de crise. Basculement vers la légitimité naissante.
 
 ### Acte II — Construction
-**Trajectoire** : montée en puissance, ambition, ambiguïté morale croissante.
+Le joueur choisit. Ouverture du tableau du Conseil après être devenu Régent (mission 7). Construction du pouvoir, ambivalence du chemin choisi (César ou Médicis).
 
-| Phase | Intention émotionnelle |
-|-------|------------------------|
-| Début Acte II | Conscience d'avoir gagné quelque chose, défiance envers le Conseil |
-| Préparation expédition | Concentration, planification, sentiment de progrès |
-| Décisions politiques | Inconfort moral progressif — chaque choix exclut un autre |
-| Mission 7 (cristallisation César/Médicis) | Vertige du choix politique majeur, conscience d'un point de bascule |
-| Devenir Régent | Solitude du pouvoir, jamais pleine satisfaction |
+Émotions visées : agentivité progressive, tension morale, ambiguïté.
 
-**À ne pas produire** : sentiment de maîtrise tranquille. Le pouvoir doit toujours coûter quelque chose de visible (un PNJ qui s'éloigne, un quartier qui se tend).
+### Acte III — Crise
+Point bas intérieur. Doute fondamental sur sa propre légitimité. Ce n'est pas "j'ai perdu" — c'est "je ne sais plus si je mérite". La résonance avec le mentor mort (qui a obéi) émerge ici.
 
-### Acte III — Crise (le pivot du désespoir)
-**Trajectoire** : effondrement intérieur, doute sur soi-même.
+L'entité parle directement au héros pour la première fois (mission 10).
 
-| Phase | Intention émotionnelle |
-|-------|------------------------|
-| Mission 9 (la fissure éclate) | Choc — la trahison vient de l'intérieur |
-| Mission 10 (le miroir, l'entité parle) | Vertige existentiel — doute profond sur sa propre légitimité |
-| Mission 11 (résolution) | Résignation lucide, ou colère froide, selon choix |
-
-**Point bas explicite** : « Je ne sais plus si je mérite de mener cette expédition. Je ne sais plus si je suis le bon. » (GDD section 12)
-
-Résonance avec le mentor : il a obéi et il est mort. Le joueur a désobéi et il survit. Doute : qui avait raison ?
-
-**À ne pas produire** : désespoir gratuit qui paralyse le joueur. Le point bas doit rester traversable.
+Émotions visées : doute, vertige moral, isolement.
 
 ### Acte IV — Descente
-**Trajectoire** : détachement à nouveau, mais cette fois choisi et orienté.
+Confrontation. Choix final. Plus de retour en ville, plus de gestion. Structure ME3 fin (alternance camp/mission).
 
-| Phase | Intention émotionnelle |
-|-------|------------------------|
-| Départ | Solennité, presque rituelle |
-| Camps successifs | Resserrement, intimité forcée avec l'équipe restante |
-| Approche du Gouffre | Étrangeté croissante, fil mystique qui devient permanent |
-| Face à l'entité | Tentation réelle, vérité partielle qui résonne avec la motivation initiale |
-
-**À ne pas produire** : combat épique de boss final classique. La rencontre avec l'entité est principalement dialogique et morale, pas tactique.
+Émotions visées : convergence, fatalisme partiel, lucidité, choix.
 
 ---
 
-## Détaillé par scène (scènes écrites)
+## Principes d'écriture pour la voix du joueur
 
-### Mission 1 — Scène 1 (Interrogatoire surface)
-
-**Avant la scène** : le joueur arrive sans contexte, état mental probable « curiosité méfiante envers le jeu ». Il ne connaît rien du monde.
-
-**Pendant la scène** :
-- Sensation que **tout est normal pour les fonctionnaires** — c'est ce qui doit être anormal pour le joueur.
-- **Curiosité dangereuse** : envie d'en savoir plus sur l'abîme, sentiment qu'il ne faudrait pas.
-- **Inconfort progressif** : politesse + menace voilée + adieu = sortie nauséeuse.
-- **Première impression du protagoniste** : il accepte. Il ne se révolte pas. Le joueur doit sentir cette résignation sans la juger.
-
-**Après la scène, le joueur doit** :
-- Avoir choisi sa motivation initiale (parmi 4) avec un peu de friction (chaque option lui paraît coûter quelque chose).
-- Vouloir comprendre où il s'est embarqué.
-- Ne pas se sentir au-dessus du monde — le fonctionnaire est manifestement plus intelligent que lui.
-
-**Marqueurs d'échec de la scène** :
-- Le fonctionnaire paraît sadique → raté.
-- Le fonctionnaire paraît bienveillant → raté.
-- Le joueur a envie de blaguer → raté.
-- Le joueur a envie de partir vite → atteint.
+- Le joueur observe avant de parler.
+- Pas de monologue intérieur explicatif.
+- La voix intérieure (modèle 2) commente, ressent, doute — elle ne théorise pas.
+- La voix intérieure ne dit jamais des informations que le personnage n'a pas encore.
+- Les choix de dialogue doivent toujours représenter de vraies attitudes différentes (cf. dialogue_style_guide.md).
 
 ---
 
-## Notes de production
+## Interface dialogue type Mass Effect 2/3 + modèle 2 Disco Elysium
 
-À compléter au fil des scènes écrites :
-- Détailler scènes 2-5 mission tutoriel (descente, arrivée donjon, mission qui dérape, sortie vers la ville)
-- Détailler missions 2-3 (Acte I)
-- Détailler mission 4 phases par phases (déjà décomposée en 5 phases dans GDD section 11)
-- Acte II/III/IV : préciser au fur et à mesure que les missions sont écrites
+- Roue de dialogue avec choix multiples.
+- Pas de système Paragon/Renegade.
+- Les choix peuvent être grisés (déjà explorés) mais rejouables.
+- Distinction entre choix de lore (creuser un sujet, retour à la roue) et choix de progression (avance la scène).
+- Les choix de progression peuvent être visiblement différents (couleur, position, marqueur).
+
+Référence d'implémentation : voir la structure des dialogues de la scène 1 dans `/dialogues/missions/mission1/scenes/`.
