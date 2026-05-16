@@ -1,9 +1,9 @@
 # Player Experience
 
-## Identité de surface (v0.4)
+## Identité de surface (v0.4, révisée v0.13)
 - **Genre** : homme
 - **Âge** : 28-38 ans (adulte)
-- **Voix narrative** : modèle 2 (choix de répliques détaillés, type Disco Elysium)
+- **Voix narrative** : choix de répliques détaillés, sans voix intérieure
 - **Interface dialogue** : roue de dialogue type Mass Effect 2/3, sans Paragon/Renegade
 
 ## Postulat de départ
@@ -72,14 +72,16 @@ Confrontation. Choix final. Plus de retour en ville, plus de gestion. Structure 
 ## Principes d'écriture pour la voix du joueur
 
 - Le joueur observe avant de parler.
-- Pas de monologue intérieur explicatif.
-- La voix intérieure (modèle 2) commente, ressent, doute — elle ne théorise pas.
-- La voix intérieure ne dit jamais des informations que le personnage n'a pas encore.
+- Pas de monologue intérieur.
+- Les répliques du joueur doivent porter son état émotionnel (épuisé, détaché, parfois curieux) par leur économie, leur registre et leur rythme — pas par verbalisation explicite de ce qu'il ressent.
 - Les choix de dialogue doivent toujours représenter de vraies attitudes différentes (cf. dialogue_style_guide.md).
+- La cohérence libellé/réplique parlée est définie dans dialogue_style_guide.md.
+
+> **Note d'évolution (v0.13)** : la voix intérieure (inspiration Disco Elysium initialement prévue) a été abandonnée. L'écriture s'appuie désormais sur les seules répliques parlées du joueur et sur les didascalies, avec l'exigence que la voix du protagoniste soit lisible *à travers* ses choix et la sobriété de ses formulations.
 
 ---
 
-## Interface dialogue type Mass Effect 2/3 + modèle 2 Disco Elysium
+## Interface dialogue type Mass Effect 2/3
 
 - Roue de dialogue avec choix multiples.
 - Pas de système Paragon/Renegade.
