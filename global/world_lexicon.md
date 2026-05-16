@@ -25,7 +25,8 @@ Le GDD reste la source des décisions de fond. Ce fichier traduit ces décisions
 - **Exception** : la médecin (et possiblement d'autres pratiquants religieux marginaux) le désigne par un mot précis hérité de sa religion. Mot à fixer : *Le Trompeur* / *La Voix* / *autre*. **À arrêter à l'écriture du personnage.**
 
 ### « L'abîme »
-- Le mot existe dans le monde, mais c'est un registre **soutenu / surface**. Un fonctionnaire de la surface peut le dire (cf. la phrase signature de Jean Dubois). Un habitant de la faille dira « la faille ».
+- Le mot existe dans le monde, mais c'est un registre **soutenu / surface**. La surface l'utilise pour désigner la faille (niveau 2) — c'est leur mot, marqué par la distance et la condamnation. Un fonctionnaire de la surface peut le dire (cf. la phrase signature de Jean Dubois).
+- **Les habitants de la faille n'utilisent jamais « l'abîme »** pour se désigner ou désigner leur propre niveau. Ils disent « la faille » (par défaut), « le rejet » ou « le bord du monde » (registres poétique ou amer).
 - Ne pas confondre avec le titre du jeu, qui n'est pas un mot diégétique pour le joueur.
 
 ---

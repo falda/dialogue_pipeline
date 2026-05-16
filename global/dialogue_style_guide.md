@@ -73,3 +73,4 @@ Préférer :
 - Les choix doivent représenter de vraies attitudes différentes.
 - Éviter les faux choix.
 - Chaque choix doit avoir une intention claire.
+- **Cohérence libellé / réplique parlée** : le libellé du bouton (entre crochets) annonce l'intention du choix. La réplique parlée qui suit développe cette intention — elle peut être plus implicite, plus chargée ou plus sobre que le libellé, mais ne doit jamais le contredire ni le rendre méconnaissable. Le joueur ne doit pas avoir l'impression que son personnage dit autre chose que ce qu'il a sélectionné.

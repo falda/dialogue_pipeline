@@ -41,10 +41,11 @@ Banalité du mal arendtienne : sa politesse glaçante est celle d'un homme qui a
 - ne jamais laisser entendre qu'il connaît l'existence de la cité (parce qu'il ne la connaît pas)
 
 ## Phrases signature de la scène 1
-- *"Les menottes sont faites pour les criminels."*
 - *"Alors c'est vous qui corrompez mes gardes ?"* (ton amusé, ironique)
 - *"J'ai croisé beaucoup de fous mais c'est la première fois qu'on veut aller dans l'abîme."*
 - *"Mais pourquoi vouloir aller là-bas ?"*
+
+> Note de production : la phrase *"Les menottes sont faites pour les criminels."* figurait dans cette liste mais a été abandonnée à l'écriture de v3 — remplacée par *"Notre invité mérite mieux que cela"* qui s'est avérée fonctionner mieux en contexte.
 
 Avertissements selon la motivation choisie par le joueur :
 - Silencieux : *"Vous ne dites rien. C'est probablement la réponse la plus sage que j'aie entendue dans cette pièce."*
