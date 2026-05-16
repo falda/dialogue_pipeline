@@ -1,0 +1,105 @@
+# Évaluation — mission1/scene1/v3
+
+**Date** : 2026-05-16
+**Fichier évalué** : `dialogues/missions/mission1/scene1/mission1_scene1_v3.ink`
+**Évaluateur** : IA (Claude, conversation Incognito)
+
+---
+
+## Validation technique
+
+- **Inky** : FAIL — la directive `INCLUDE global.ink` est manquante en tête de fichier. Le fichier redéclare `VAR player_name` et `VAR motivation`, qui sont déjà déclarées dans `global.ink` (cf. `global/global.ink`). Selon `ink_conventions.md` §4, les variables globales doivent être incluses, jamais redéclarées dans un fichier de scène. Par ailleurs, `player_age` (déclarée dans `global.ink`) n'est jamais consommée ici, mais c'est attendu à ce stade — non bloquant.
+- **Formatage** : FAIL — plusieurs manquements aux `ink_conventions.md` :
+  - §6 : le knot `Comment_ca` se termine par un retour à `Questions` sans qu'aucun choix n'ait été présenté dans ce knot (acceptable), mais le knot `Pourquoi_traitement` enchaîne directement vers `Comment_ca` via une réplique unique du joueur — pas un choix, donc conforme.
+  - §6 (réel défaut) : le knot final `Fin_Interrogatoire` ne propose qu'**un seul choix** marqué `*` (« Le remercier »), ce qui constitue un faux choix interdit par `ink_conventions.md` §6 et `dialogue_style_guide.md` (Interactive Dialogue). Le joueur n'a pas d'alternative — c'est un bouton « continuer » déguisé.
+  - §1 : la ligne `JOUEUR: Merci, Monsie—` est imbriquée dans le bloc du choix, ce qui est correct, mais la coupure typographique (`Monsie—`) devrait idéalement utiliser le tiret cadratin `—` (ce qui est le cas ici) — OK.
+  - Commentaire `// Ouverture de l'interface de création du personnage dans Unity` : utile, conforme à l'usage des commentaires `//` distingué des didascalies.
+- **Langue** : PASS — pas de faute majeure repérée, ponctuation cohérente, vouvoiement constant.
+
+---
+
+## Score
+
+### 1. Cohérence narrative (/40)
+
+- **Objectifs de la scène : 8/10** — La scène remplit ses objectifs principaux : introduction de la faille comme exception, bureaucratie de surface, ton institutionnel froid, caractère irréversible de la descente. L'avertissement final selon la motivation est bien présent. Léger flottement : la scène introduit aussi le sous-intrigue de la corruption du garde (`Pourquoi_traitement` → `Comment_ca`), qui n'est pas listé dans les objectifs du `scenario_mission1_scene1.md` — ce n'est pas forcément un défaut, mais ça déporte légèrement l'attention de la faille vers la mécanique de pouvoir du fonctionnaire.
+
+- **Cohérence du lore : 9/10** — Respect du `world_lexicon.md` : « la faille » utilisée par défaut, « l'abîme » dans la bouche du fonctionnaire (cohérent avec son registre soutenu/surface), pas de vocabulaire interdit. Le fonctionnaire ne laisse jamais entendre qu'il connaît l'existence de la cité-paroi, ce qui respecte la compartimentation du savoir (`world_rules.md` v0.12 et fiche `jean_dubois.md`). Réserve mineure : la formule « je vous envoie vers une mort certaine » est très forte et tranchée — c'est cohérent avec la croyance Géhenne de la surface, mais c'est aussi le genre de phrase qui pourrait, à la relecture après plusieurs heures de jeu, sembler trop affirmative pour un personnage censé ne pas savoir précisément ce qui se passe en bas. Cohérent en l'état, à surveiller.
+
+- **Cohérence des personnages : 8/10** — Jean Dubois colle à sa fiche : calme constant, vouvoiement, vocabulaire administratif, politesse glaçante. Les phrases signature listées dans `jean_dubois.md` sont presque toutes présentes (« Alors comme ça, c'est vous qui... », les quatre avertissements selon motivation). La référence O'Brien est lisible. Réserve : la phrase signature *« Les menottes sont faites pour les criminels »* est absente — remplacée par « Notre invité mérite mieux que ça », qui est dans le même registre mais moins ciselée. Le protagoniste, lui, est peu caractérisé — ses répliques sont fonctionnelles (questions de relance, motivations) mais ne laissent pas affleurer son état « épuisé / détaché » décrit dans `protagonist.md`. Voir Sous-texte plus bas.
+
+- **Contrôle de l'information : 8/10** — Bonne discipline globale : aucune exposition lourde sur la faille, le mystère est maintenu, les révélations sont contenues. Le fonctionnaire ne dit rien de ce qu'il ne devrait pas savoir. Petit bémol : `Reponse_Savoir` se termine sur *« Vous l'apprendrez à vos dépens »*, qui frôle la prolepse narrative — c'est une formule classique mais qui souligne au joueur que « quelque chose va arriver », ce qui est de l'information méta plus que de l'information diégétique.
+
+### 2. Qualité d'écriture (/40)
+
+- **Naturel des dialogues : 7/10** — Globalement crédible, vouvoiement constant, registre administratif tenu. Quelques formulations un peu trop bien tournées pour être pleinement naturelles, mais c'est en partie le style du personnage. Le protagoniste, en revanche, parle de manière neutre et lisse — ses répliques sont des relances de scénario plus que des paroles incarnées. La réplique « Je veux voir ce que les autres refusent de regarder » sonne légèrement littéraire pour quelqu'un de présenté comme « épuisé, détaché ».
+
+- **Sous-texte : 6/10** — Le sous-texte fonctionne dans la bouche du fonctionnaire (la main posée sur le tiroir sans l'ouvrir = excellente didascalie, dit tout sans expliquer ; le garde qui « évite soigneusement son regard » = idem). Le sous-texte fonctionne moins côté joueur : les répliques du joueur disent assez frontalement ce qu'elles veulent dire (« Quelqu'un m'attend peut-être encore là-bas », « Je veux voir ce que les autres refusent de regarder »). Le dialogue_style_guide demande que « les émotions soient généralement implicites » et que « le non-dit soit important » — c'est tenu côté PNJ, moins côté PJ.
+
+- **Rythme : 8/10** — Le rythme global est bon. Les répliques sont courtes à moyennes, les didascalies espacent bien. La progression questions libres → choix de motivation forcé → avertissement → sortie est lisible. Léger excès de répétition du préfixe `FONCTIONNAIRE:` sur deux ou trois lignes consécutives (par exemple au début de `Scene1` : sept lignes consécutives du fonctionnaire entrecoupées d'une seule didascalie courte) — c'est un défaut mineur de mise en page Ink, pas un défaut d'écriture, mais ça alourdit visuellement.
+
+- **Impact émotionnel : 7/10** — La scène produit globalement le malaise visé. La conclusion (« Ne me remerciez pas. Après tout... je vous envoie vers une mort certaine. Je vous dis adieu ») fonctionne fort, surtout après la politesse cordiale qui précède — le contraste est bien construit. Réserve : l'impact dépend trop du seul choix « Le remercier » qui n'a pas d'alternative — l'effet final est conçu pour un joueur qui choisit de remercier, mais comme c'est le seul chemin, l'effet de contraste est forcé, pas construit (voir Design interactif).
+
+### 3. Design interactif (/20)
+
+- **Clarté des choix : 8/10** — Les libellés courts entre crochets sont clairs, mutuellement exclusifs, et chacun annonce honnêtement le contenu de la réplique qui suit. Les quatre motivations sont distinctes et lisibles. La distinction `+` (questions rejouables) / `*` (choix consommés de motivation et de fin) est bien utilisée selon `ink_conventions.md` §6.
+
+- **Pertinence des choix : 5/10** — Les quatre choix de motivation sont d'authentiques attitudes différentes — très bien. Mais le knot `Fin_Interrogatoire` ne propose qu'un seul choix `*` (« Le remercier »), ce qui viole explicitement `ink_conventions.md` §6 (« un knot ne doit jamais contenir un seul choix unique présenté avec `*` ou `+` ») et `dialogue_style_guide.md` (« éviter les faux choix »). C'est le défaut le plus net du fichier. Soit le passage doit être forcé sans bracket, soit il faut une vraie alternative (refuser de remercier, sortir en silence, demander une dernière chose, etc.).
+
+### Score global : 74/100
+
+---
+
+## Détection d'écriture IA
+
+Signaux observés :
+- Quelques répliques du joueur un peu trop « bien écrites » pour le naturalisme visé (« Je veux voir ce que les autres refusent de regarder ») — frôle la formulation symétrique.
+- Tendance à des fins de réplique sentencieuses chez le fonctionnaire (« Il n'existe aucun endroit où l'on échappe aux conséquences de ses actes », « Mais il n'a jamais épargné personne du jugement ») — c'est cohérent avec le personnage O'Brien-esque, mais le pattern se répète sur les quatre `Reponse_*` et devient mécanique : chaque réponse finit sur une maxime. Risque de signature stylistique trop régulière.
+
+Signaux absents :
+- Pas d'exposition artificielle, pas de « comme tu le sais », pas de répétitions de structures lourdes, pas d'adjectifs accumulés.
+- Pas d'émotion sur-explicitée — les personnages ne verbalisent pas ce qu'ils ressentent.
+- Pas de marqueurs fantasy générique ni de vocabulaire interdit.
+
+Globalement, l'écriture passe le filtre, à l'exception du pattern de maxime finale sur les quatre réponses à la motivation.
+
+---
+
+## Critical Issues
+
+- **Faux choix au knot `Fin_Interrogatoire`** : un seul choix `*` (« Le remercier ») sans alternative. Viole `ink_conventions.md` §6 et `dialogue_style_guide.md`. À corriger structurellement.
+- **Variables redéclarées sans `INCLUDE global.ink`** : `player_name` et `motivation` sont déjà déclarées dans `global.ink`. Risque de désynchronisation entre scènes. Viole `ink_conventions.md` §4.
+
+## Major Issues
+
+- **Knot `Comment_ca`** : la transition `Pourquoi_traitement` → `Comment_ca` se fait via une seule réplique courte du joueur (« Utile ? ») puis bascule dans un nouveau knot avec un seul échange avant retour à `Questions`. La fragmentation en deux knots distincts pour un échange aussi court est lourde — ce devrait être un seul knot. Défaut de structure, pas d'écriture.
+- **Pattern stylistique répété** : les quatre `Reponse_*` se concluent toutes sur une maxime du fonctionnaire. Effet de signature, mais qui devient mécanique à la quatrième occurrence (or le joueur ne verra qu'une seule de ces réponses par partie — l'effet est donc invisible *en jeu*, mais visible *à la relecture/QA*, et signal le risque de pattern dans la suite).
+- **Voix du protagoniste sous-caractérisée** : ses répliques sont des relances fonctionnelles. Son état « épuisé, détaché » ne transparaît pas dans son langage. Le `player_experience.md` mentionne un modèle Disco Elysium avec voix intérieure — la voix intérieure n'est pas encore là, à voir si elle est prévue pour plus tard.
+
+## Minor Issues
+
+- Phrase signature *« Les menottes sont faites pour les criminels »* (listée dans `jean_dubois.md`) absente — remplacée par une formulation proche mais moins ciselée.
+- `Reponse_Savoir` : *« Vous l'apprendrez à vos dépens »* — léger effet de prolepse, frôle le commentaire méta.
+- Trois noms propres encore en `XXX` (nom du fonctionnaire, nom de la prison) — c'est documenté comme « à fixer » dans les référentiels, donc non bloquant, mais à tracer.
+- Densité visuelle : plusieurs blocs de 5-7 répliques consécutives du fonctionnaire sans didascalie ni respiration. Ne pénalise pas le rythme à la lecture, mais alourdit la mise en page Ink.
+
+## Strengths
+
+- **Didascalies au cordeau** : « le garde évite soigneusement son regard », « la main sur un tiroir, sans l'ouvrir », « referme lentement le dossier ». Tout est visible, rien n'est intérieur, le sous-texte est dans le geste. Excellent respect de `ink_conventions.md` §2.
+- **Construction de la menace par la politesse** : la séquence « Notre invité mérite mieux que ça » / « Vous pouvez disposer » / le tiroir / « je vous envoie vers une mort certaine » construit la banalité du mal sans jamais l'expliciter. Tient la promesse de la fiche `jean_dubois.md` et de `world_rules.md` (banalité arendtienne).
+- **Quatre motivations distinctes et lisibles** : chaque libellé annonce honnêtement une posture différente, chaque avertissement répond spécifiquement. Le silence comme option à part entière est un bon respect du `player_experience.md`.
+- **Compartimentation du savoir respectée** : le fonctionnaire ne sait pas que la cité existe, et son texte ne laisse rien filtrer. Cohérent avec la v0.12 de `world_rules.md`.
+- **Contraste final remerciement/adieu** : l'effet de bascule sur la dernière réplique est fort, bien préparé par la politesse cordiale.
+
+## Suggested Improvements
+
+Par ordre de priorité :
+
+1. **Corriger le faux choix de `Fin_Interrogatoire`** : soit transformer « Le remercier » en passage forcé sans bracket, soit ajouter une vraie alternative (par exemple : sortir en silence, ou une réplique de défi). Décision à prendre selon l'intention narrative (faut-il que le joueur ait la possibilité de ne pas remercier ?).
+2. **Ajouter `INCLUDE global.ink` en tête de fichier et retirer les redéclarations** de `player_name` et `motivation`. Garder le commentaire `// initialisée par Unity` à côté de l'include si pertinent, ou le déplacer dans `global.ink`.
+3. **Fusionner `Pourquoi_traitement` et `Comment_ca`** en un seul knot pour fluidifier.
+4. **Travailler la voix du protagoniste** : décider à ce stade si les répliques du joueur doivent porter la trace de son épuisement/détachement, ou si elles restent neutres parce que la voix intérieure (modèle 2) prendra le relais plus tard. Si neutre, l'assumer ; si incarnée, retravailler quelques répliques pour casser leur lissé (la quête du savoir notamment).
+5. **Casser le pattern de maxime finale** sur les quatre `Reponse_*` : varier au moins une ou deux des conclusions pour qu'elles ne suivent pas toutes la même structure « observation + sentence morale ».
+6. **Remettre la phrase signature « Les menottes sont faites pour les criminels »** ou décider explicitement de la couper — c'est un détail mais c'est une ligne qui caractérise fortement Jean Dubois selon sa fiche.
+7. **Atténuer la prolepse de `Reponse_Savoir`** : trouver une formulation qui menace sans annoncer.
+8. **Aérer visuellement** les longs blocs de répliques consécutives du fonctionnaire avec une didascalie supplémentaire (un geste, un silence) — pas pour le rythme à la lecture (qui est bon) mais pour la lisibilité du fichier en QA.
