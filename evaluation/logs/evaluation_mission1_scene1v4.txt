@@ -1,0 +1,112 @@
+# Évaluation — mission1/scene1/v4
+
+**Date** : 2026-05-17
+**Fichier évalué** : `dialogues/missions/mission1/scene1/mission1_scene1_v4.ink`
+**Évaluateur** : IA (Claude, conversation Incognito)
+
+---
+
+## Validation technique
+
+- **Inky** : PASS — syntaxe valide, branches accessibles, variable `motivation` déclarée dans `global.ink` et consommée par les quatre choix de motivation. Variables `player_name` utilisée via interpolation. Pas de boucle involontaire détectée (la roue `Questions` est en `+` rejouable, et le choix de progression `[Pourquoi suis-je ici ?]` est également en `+` ce qui est techniquement valide mais discutable — voir Issues).
+- **Formatage** : PASS — indentation correcte, knots en `Snake_Case_Avec_Majuscules`, didascalies entre crochets sur lignes propres, préfixes locuteurs en majuscules.
+- **Langue** : FAIL — fautes relevées :
+  - « Mon rôle n'a jamais **était** d'interdire » → « été » (Fin_Interrogatoire)
+  - « jusqu'où elle vous **emmenera** » → « emmènera » (Reponse_Savoir)
+  - « Merci, Monsie— » : le tiret de coupure devrait être un tiret cadratin (—) ou un tiret demi-cadratin précédé d'un trait correct ; à harmoniser avec la typographie française (« Merci, Mons— » suffit visuellement).
+  - Ponctuation : « FONCTIONNAIRE: » utilise les deux-points anglo-saxons (collés) alors que la typographie française demanderait une espace insécable avant. Convention propre au projet (cf. `ink_conventions.md` qui impose `LOCUTEUR: ` collé) — non comptée comme faute, mais à noter que les répliques *internes* respectent bien l'espace française avant `?` et `:`.
+
+---
+
+## Score
+
+### 1. Cohérence narrative (/40)
+
+- **Objectifs de la scène : 9/10** — Les quatre objectifs du scénario sont remplis : la faille est introduite comme dangereuse et irréversible (« je vous envoie vers une mort certaine »), la bureaucratie de surface est incarnée (dossier, procédure, transfert programmé), le ton du monde est posé (froid, poli, glaçant), et le caractère exceptionnel de la descente volontaire est explicitement marqué (« je n'avais encore jamais rencontré quelqu'un cherchant volontairement »). Léger retrait : le caractère « irréversible » de la descente reste plus dit que ressenti — l'irréversibilité passe par une réplique finale plutôt que par une accumulation diégétique.
+
+- **Cohérence du lore : 9/10** — Le mot « abîme » est correctement employé par le fonctionnaire (registre soutenu / surface, conforme à `world_lexicon.md`). La banalisation institutionnelle est respectée. Le savoir compartimenté est tenu : Jean Dubois ne laisse jamais entendre qu'il connaît la cité. La phrase « je vous envoie vers une mort certaine » est cohérente avec la croyance Géhenne de la surface. Petit point d'attention : « le prochain transfert aura lieu la semaine prochaine » introduit une temporalité (une semaine d'attente) qui n'est ni contredite ni développée — à vérifier en cohérence avec la scène 2.
+
+- **Cohérence des personnages : 9/10** — Jean Dubois est très fidèle à sa fiche : politesse glaçante, calme constant, vocabulaire administratif, ironie froide (« Notre invité mérite mieux que ça »), distance émotionnelle. Le joueur respecte sa fiche : observation avant parole, économie verbale, pas de verbalisation des émotions, pas de monologue intérieur. Le garde ne parle pas, conforme à `scenario_mission1_scene1.md`. Très léger flottement : la réplique « J'ai aussi un dossier sur lui » dans `Pourquoi_traitement` rend Jean Dubois un peu plus *transparent sur sa méthode* qu'attendu d'un homme dont l'art est précisément de ne pas tout dire — mais reste défendable comme démonstration de pouvoir froid.
+
+- **Contrôle de l'information : 8/10** — Bonne retenue globale. Aucune révélation majeure sur la faille, le mystère est préservé. Les phrases signature de la fiche personnage sont reprises avec discernement (« Alors comme ça c'est vous qui corrompez mes gardes ? » → légèrement reformulée). Retrait : la branche `Pourquoi_traitement` livre une information utile (le fonctionnaire utilise la corruption du garde comme levier) qui éclaire un peu trop directement le mécanisme du pouvoir — à mettre en balance avec la cohérence du personnage. Par ailleurs, l'avertissement « ceux qu'on cherche en bas sont rarement ceux qu'on trouve » de la fiche n'est pas réutilisé dans `Reponse_Quete` ; la version actuelle (« cette personne souhaite-t-elle réellement vous revoir ? ») est différente et moins lapidaire.
+
+**Sous-total : 35/40**
+
+### 2. Qualité d'écriture (/40)
+
+- **Naturel des dialogues : 8/10** — Les répliques de Jean Dubois sonnent juste : phrases courtes, rythme propre, ironie tenue (« Notre invité mérite mieux que ça »). Les répliques du joueur sont sobres et conformes à sa voix. Quelques formules très légèrement « écrites » plus que parlées : « Un homme qui sait que l'on a un dossier sur lui est toujours très coopératif » — sentencieuse, presque maxime ; défendable pour ce personnage, mais à la limite. « Il n'existe aucun endroit où l'on échappe aux conséquences de ses actes » est dans le même registre.
+
+- **Sous-texte : 8/10** — Bon usage globalement. « Notre invité mérite mieux que ça » dit autant sur le rapport de pouvoir Dubois/garde que sur la civilité de façade. Le silence du garde, la main sur le tiroir sans l'ouvrir dans `Pourquoi_traitement`, le « ... » du choix silencieux fonctionnent. Retrait : `Reponse_Fuite` explicite la leçon morale (« on n'échappe pas aux conséquences ») là où le sous-texte aurait pu suffire ; idem pour `Reponse_Savoir` (« la curiosité est un vilain défaut ») qui frôle l'aphorisme didactique.
+
+- **Rythme : 8/10** — Bon découpage en répliques courtes, didascalies bien placées qui aèrent. L'ouverture (entrée → assise → retrait des menottes → renvoi du garde → ouverture du dossier) est rythmée correctement. La séquence finale (note → annonce du transfert → reconduite en cellule → choix d'adieu) est efficace. Retrait : la succession des trois `FONCTIONNAIRE:` consécutifs en ouverture (« Entrez. » / « J'étais justement en train de lire votre rapport. » / « Asseyez-vous donc. ») gagnerait à être interrompue par un battement (didascalie ou silence) ; actuellement le fonctionnaire enchaîne trois actes de parole avant que le joueur ne s'asseye.
+
+- **Impact émotionnel : 8/10** — La cible émotionnelle du scénario (malaise, tension calme, inhumanité administrative) est atteinte. L'adieu final (« je vous envoie vers une mort certaine ») produit l'effet recherché. Retrait : l'impact repose beaucoup sur la dernière réplique. Un second pic émotionnel plus tôt — par exemple via une asymétrie plus marquée entre la politesse de Dubois et la situation — renforcerait la courbe.
+
+**Sous-total : 32/40**
+
+### 3. Design interactif (/20)
+
+- **Clarté des choix : 8/10** — Les libellés des quatre questions initiales sont courts et lisibles (« Où suis-je ? », « Pourquoi ce traitement ? », « Le garde », « Pourquoi suis-je ici ? »). Les libellés des motivations sont distincts et lisibles. La cohérence libellé/réplique parlée est correcte (cf. `dialogue_style_guide.md`) : « Garder le silence » → « ... » ; « Je veux savoir ce qu'il y a au fond » → « J'ai besoin de comprendre. » — léger glissement de registre (le libellé est tourné vers l'objet, la réplique vers la nécessité intérieure) mais l'intention reste reconnaissable. Retrait : le libellé « Le garde » est plus elliptique que les trois autres ; à harmoniser dans le style (soit tous nominaux, soit tous interrogatifs).
+
+- **Pertinence des choix : 9/10** — Les quatre questions de la roue creusent quatre dimensions distinctes (lieu, traitement, garde, motivation) — pas de redondance. Les quatre motivations sont structurellement différentes et déclenchent quatre variables persistantes (`fuite` / `quete` / `savoir` / `silence`), ce qui est conforme à `player_experience.md`. Le choix final (remercier / sortir en silence) est petit mais signifiant : il caractérise l'attitude finale du joueur. Très léger retrait : ce dernier choix n'a pas de conséquence persistante visible (les deux branches convergent vers `-> END` avec un texte presque identique) — ce qui est acceptable pour un choix de caractérisation, mais à distinguer clairement d'un choix de progression.
+
+**Sous-total : 17/20**
+
+### Score global : 84/100
+
+---
+
+## Détection d'écriture IA
+
+Signaux IA globalement absents. Pas d'exposition artificielle (« comme tu le sais »), pas d'accumulation d'adjectifs, pas de verbalisation explicite des émotions, voix distincte du fonctionnaire bien tenue. Les rares formulations limites sont sentencieuses (« on n'échappe pas aux conséquences de ses actes », « la curiosité est un vilain défaut ») — elles relèvent plus du tic d'écriture O'Brien-esque assumé que d'un marqueur IA. Pas de répétition structurelle entre les quatre `Reponse_*` malgré la symétrie de la branche (chaque réponse a son rythme propre).
+
+---
+
+## Critical Issues
+
+Aucun.
+
+---
+
+## Major Issues
+
+- **Fautes de langue** : « était » pour « été » dans `Fin_Interrogatoire`, et « emmenera » pour « emmènera » dans `Reponse_Savoir`. À corriger avant toute revue narrative.
+- **Choix `[Pourquoi suis-je ici ?]` en `+`** : ce choix mène à `Choix_Motivation` qui contient des choix `*` (consommés). Le marquer `+` permet au joueur de revenir à la roue *avant* d'avoir choisi sa motivation, mais une fois la motivation choisie, le retour à la roue depuis `Fin_Interrogatoire` n'est pas prévu (le knot finit par `-> END`). Vérifier que l'intention est bien : *le choix de motivation termine la roue*. Si oui, marquer `[Pourquoi suis-je ici ?]` comme `*` lèverait l'ambiguïté. Si non, prévoir un retour vers `Questions` après les réponses de motivation.
+
+---
+
+## Minor Issues
+
+- **Trois `FONCTIONNAIRE:` consécutifs à l'ouverture** sans didascalie intercalée : casse légèrement le rythme et donne l'impression d'un seul bloc verbal. Voir aussi le bloc identique dans `Ou_suis_je` (trois répliques d'affilée).
+- **Libellé « Le garde »** stylistiquement isolé parmi des libellés interrogatifs. Harmoniser le style des libellés de la roue.
+- **`Reponse_Quete` n'utilise pas la phrase signature** de la fiche (« ceux qu'on cherche en bas sont rarement ceux qu'on trouve »). La reformulation actuelle fonctionne, mais la phrase signature est plus économe et mémorable. Décision à arbitrer.
+- **« Monsieur {player_name} »** : la variable est interpolée correctement, mais le préfixe « Monsieur » suppose que le joueur a saisi un nom de famille (pas un prénom). À vérifier côté Unity dans le formulaire de création (rien dans `global.ink` ne précise s'il s'agit du nom de famille). Si l'utilisateur saisit un prénom, « Monsieur Loic » sonnera faux.
+- **« Mons— »** (réplique « Le remercier ») : la coupure typographique pourrait être plus nette. Vérifier que le tiret rendu en jeu est bien un cadratin.
+- **Nom du fonctionnaire et nom de la prison** : `XXX XXX` et `prison de XXX` sont des marqueurs de production à fixer. Signalé pour information, conforme aux notes des fiches.
+
+---
+
+## Strengths
+
+- Excellente incarnation de Jean Dubois : intelligence calme, politesse glaçante, élégance austère — la référence O'Brien est lisible sans pastiche.
+- Maîtrise du lexique : « abîme » utilisé correctement dans la bouche du fonctionnaire, aucun terme interdit (pas de « démon », « magie », vocabulaire chrétien explicite, etc.).
+- Banalité du mal arendtienne tenue : Dubois est froid, jamais cruel, jamais sadique. Le malaise vient de sa civilité, pas d'une agression.
+- Quatre motivations bien différenciées dans leurs libellés, leurs répliques parlées et les réponses qu'elles déclenchent — chacune cohérente avec l'avertissement prévu dans la fiche personnage.
+- Voix du joueur sobre, économe, non bavarde, conforme à `player_experience.md` et `characters/protagonist.md`.
+- Choix final (« Le remercier » / « Sortir en silence ») élégant : il caractérise sans peser, et utilise la réplique « je vous envoie vers une mort certaine » à deux reprises pour qu'aucun joueur ne la manque.
+- Usage des didascalies sobre et efficace (main sur le tiroir, regard évité, dossier refermé lentement).
+
+---
+
+## Suggested Improvements
+
+Par ordre de priorité :
+
+1. **Corriger les deux fautes d'orthographe** (« était » → « été », « emmenera » → « emmènera »).
+2. **Clarifier la marque du choix `[Pourquoi suis-je ici ?]`** : si le passage à `Choix_Motivation` est définitif, le passer en `*` pour éviter l'ambiguïté de la roue.
+3. **Aérer les ouvertures de bloc** où trois répliques `FONCTIONNAIRE:` s'enchaînent sans didascalie : envisager une indication visuelle (mouvement, regard, geste) entre deux des trois lignes.
+4. **Arbitrer sur la phrase signature** de `Reponse_Quete` : conserver la reformulation actuelle ou revenir à la version lapidaire de la fiche. Décision d'auteur, pas de bonne réponse mécanique.
+5. **Harmoniser le style des libellés** de la roue `Questions` (tous interrogatifs ou tous nominaux).
+6. **Vérifier côté Unity** que le champ de saisie nom/prénom est cohérent avec l'usage de « Monsieur {player_name} » par Jean Dubois.
+7. **Envisager un battement** dans `Reponse_Fuite` et `Reponse_Savoir` pour réduire l'effet aphorisme et laisser la réplique respirer (sans la réécrire — piste : une didascalie courte avant ou après).
+8. **Fixer le nom de la prison et du fonctionnaire** avant version définitive (rappel des notes de production).
