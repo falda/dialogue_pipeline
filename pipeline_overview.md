@@ -55,6 +55,12 @@ Avant d'écrire un dialogue, les intentions et contraintes sont posées dans :
 
 L'évaluation IA et la grille produisent des retours structurés. Ils sont des inputs, pas des autorités. La décision finale d'acceptation d'un dialogue revient toujours à l'auteur (Loïc).
 
+### 6. Impartialité de l'évaluateur, intégration du réviseur
+
+L'évaluateur fonctionne en isolation (projet Claude dédié, sans accès aux conversations précédentes, sans rapport antérieur attaché). Cette isolation garantit que chaque évaluation soit un regard neuf.
+
+La révision en revanche est intégrée à la conversation principale avec l'auteur. Un agent réviseur isolé a été testé puis abandonné au profit d'un mode plus économe, où l'auteur fait le triage en conversation avec Claude et le `.ink` révisé est produit dans la même session. Garde-fou : Claude ne modifie que ce qui a été explicitement acté par l'auteur dans le triage ; aucune réécriture hors triage n'est permise.
+
 ---
 
 ## Le flux de travail
@@ -75,16 +81,16 @@ L'évaluation IA et la grille produisent des retours structurés. Ils sont des i
                     │
                     ▼
        ┌──────────────────────────┐
-       │ 3. Évaluation (IA)       │◀────┐
+       │ 3. Évaluation (IA isolé) │◀────┐
        │    Application du rubric │     │
        └────────────┬─────────────┘     │
                     │                   │
                     ▼                   │
        ┌──────────────────────────┐     │
-       │ 4. Révision (auteur+IA)  │─────┘  Boucle tant que
-       │    Intègre les retours   │        score < 90/100
-       └────────────┬─────────────┘
-                    │ (score ≥ 90)
+       │ 4. Triage + révision     │─────┘  Boucle tant que
+       │    (auteur + Claude)     │        l'auteur juge la
+       └────────────┬─────────────┘        scène insuffisante
+                    │
                     ▼
        ┌──────────────────────────┐
        │ 5. Relecture auteur      │
@@ -106,6 +112,8 @@ Pourquoi cette étape est essentielle : la pipeline et l'évaluation IA peuvent 
 
 Le premier jet n'a pas besoin d'être propre. Il peut comporter des trous, des notes, des hésitations. Il doit avoir une voix.
 
+La version v1 est conservée tout au long du cycle comme ancrage de voix.
+
 ### Étape 2 — Entrée dans la pipeline
 
 Le premier jet est mis aux conventions du projet :
@@ -117,32 +125,44 @@ Le premier jet est mis aux conventions du projet :
 
 C'est un travail mécanique, pas créatif.
 
-### Étape 3 — Évaluation par l'IA
+### Étape 3 — Évaluation par l'IA isolée
 
-Une conversation Incognito Claude.ai (ou ultérieurement un projet d'évaluation dédié) reçoit :
+Une conversation dans le projet Claude dédié **L'Abîme — Évaluateur** reçoit :
 - Le `.ink`
 - Le scénario
 - Les fiches personnages concernées
-- Les référentiels globaux
-- La grille `evaluation_rubric.md`
+- Les référentiels globaux (en knowledge du projet)
+- La grille `evaluation_rubric.md` (en knowledge du projet)
 
-Elle produit un rapport au format défini dans `evaluation_process.md`. Le rapport est archivé dans `/evaluation/logs/`.
+L'agent évaluateur applique le prompt `prompt_evaluateur_pipeline.txt` (en Project Instructions) et produit un rapport au format défini dans `evaluation_process.md`. Le rapport est archivé dans `/evaluation/logs/`.
 
-### Étape 4 — Révision et boucle
+L'évaluateur n'a accès ni aux rapports antérieurs, ni aux triages, ni aux changelogs des cycles précédents. Cette isolation est ce qui garantit qu'il évalue la scène pour elle-même, sans biais cumulatif.
 
-L'auteur lit le rapport, trie les retours :
-- **Critiques bloquantes** → corrigées
-- **Améliorations majeures** → intégrées
-- **Améliorations mineures** → intégrées si compatibles avec le scope
-- **Remarques rejetées** → motivées brièvement, pour traçabilité
+### Étape 4 — Triage et révision (intégrés)
 
-Une nouvelle version (`_v3`, `_v4`...) est produite. Elle est ré-évaluée.
+L'auteur ouvre une conversation dans le projet principal (L'Abîme) avec Claude. Il colle le rapport et lance le triage :
 
-**Critère de sortie de la boucle : score global ≥ 90/100.**
+- **RETENU** — la critique est valide, à appliquer
+- **MODIFIÉ** — direction valable mais à orienter différemment
+- **REJETÉ** — non retenu, motif court pour traçabilité
 
-En dessous de 90, on continue d'itérer. Cela peut signifier plusieurs cycles, et c'est le prix de la qualité.
+Claude assiste au triage en posant les arbitrages un par un, puis produit `mission<N>_scene<M>_v<x+1>.ink` et le fichier `revision_v<x>_to_v<x+1>.md` (triage + changelog consolidés) dans la même session.
 
-> **Garde-fou** : si une version régresse en score, ou si trois itérations consécutives plafonnent sous 90 sans progrès, c'est probablement le signe que :
+Garde-fou : Claude ne modifie que ce qui est explicitement acté ou autorisé en auto-fix (typos, préfixes, variables orphelines). Aucune réécriture hors triage.
+
+Voir `revision_process.md` pour le détail.
+
+### Critère de sortie de la boucle
+
+**Pas de seuil chiffré.** La validation est qualitative :
+
+- pas de **Critical Issue** dans le rapport
+- pas de **Major Issue** bloquante du point de vue de l'auteur
+- l'auteur considère la scène comme suffisamment aboutie pour la livrer
+
+Le score reste un indicateur de progression utile, mais il ne déclenche pas mécaniquement la sortie de boucle. Une scène à 80/100 sans Critical peut être livrée si l'auteur juge qu'aller plus loin produirait de la sur-optimisation sans gain perçu en jeu.
+
+> **Garde-fou** : si une version régresse en score, ou si trois itérations consécutives plafonnent sans progrès, c'est probablement le signe que :
 > - le scénario lui-même demande à être révisé,
 > - ou un référentiel mérite d'être clarifié,
 > - ou la grille est mal calibrée pour cette scène.
@@ -150,11 +170,11 @@ En dessous de 90, on continue d'itérer. Cela peut signifier plusieurs cycles, e
 
 ### Étape 5 — Relecture par l'auteur
 
-Quand la version atteint le seuil, l'auteur procède à une relecture personnelle, sans la grille. Lecture à voix haute recommandée. C'est le seul moment du processus où l'œil humain non outillé évalue le texte comme un lecteur le ferait.
+Quand l'auteur juge la scène prête, il procède à une relecture personnelle, sans la grille. Lecture à voix haute recommandée. C'est le seul moment du processus où l'œil humain non outillé évalue le texte comme un lecteur le ferait.
 
 ### Étape 6 — Validation finale
 
-L'auteur valide. Le dialogue est figé en tant que version courante (`mission1_scene1.ink`). Les versions antérieures sont conservées avec leur numéro de version dans le nom.
+L'auteur valide. Le dialogue est figé en tant que version courante (`mission<N>_scene<M>.ink`). Les versions antérieures sont conservées avec leur numéro de version dans le nom.
 
 ---
 
@@ -173,14 +193,16 @@ L'auteur valide. Le dialogue est figé en tant que version courante (`mission1_s
 | `scenario_*.md` | Intention de la scène | Auteur, évaluateur |
 | `mission_*.ink` | Le dialogue lui-même | Auteur, évaluateur, moteur Ink |
 | `evaluation_rubric.md` | Grille de notation | Évaluateur |
-| `evaluation_process.md` | Procédure d'évaluation | Auteur (pour cadrer les sessions) |
+| `evaluation_process.md` | Procédure d'évaluation | Auteur (cadre les sessions évaluateur) |
+| `revision_process.md` | Procédure de triage et de révision | Auteur (cadre les sessions principales) |
 | `/evaluation/logs/eval_*.md` | Rapports archivés | Auteur (suivi de progression) |
+| `/evaluation/revisions/revision_*.md` | Triages et changelogs archivés | Auteur (traçabilité des décisions) |
 
 Trois groupes :
 
 1. **Référentiels stables** — règles du projet, évoluent rarement, beaucoup consultés.
 2. **Documents de scène** — un par scène, évoluent à chaque cycle.
-3. **Système d'évaluation** — grille, process, logs.
+3. **Système d'évaluation et de révision** — grille, process, logs, triages.
 
 ---
 
@@ -205,20 +227,27 @@ La pipeline elle-même n'est pas figée. Trois types d'évolutions sont attendue
 - Enrichissement de `player_experience.md` scène par scène
 
 ### Évolutions de calibration
-- Les seuils de score (90 pour sortir de la boucle, garde-fous) sont à recalibrer après 3-4 dialogues complets.
 - La grille `evaluation_rubric.md` pourra accueillir des critères spécifiques à L'Abîme (marqueurs mystiques, tabou linguistique du Gouffre, distinction registre surface/faille) une fois ces dimensions stabilisées.
+- Le prompt évaluateur peut être amené à exiger des références plus précises (numéro de ligne, nom de knot) pour chaque issue afin de faciliter la relecture.
 
 ### Évolutions structurelles
-- Passage d'évaluations en Incognito à un projet d'évaluation dédié, avec ses propres knowledge files.
-- Automatisation possible via routine Claude Code (déclenchement automatique d'éval à chaque push d'un `.ink`), une fois le prompt d'évaluation stabilisé.
+- L'automatisation par routine Claude Code (déclenchement automatique d'éval à chaque push d'un `.ink`) est envisageable une fois le prompt évaluateur stabilisé. Pour l'instant, le lancement reste manuel.
 
 Toute évolution significative de la pipeline (ajout d'un fichier global, changement de workflow, modification d'une convention) doit être reflétée dans ce document et dans le `README.md`.
 
 ---
 
+## Historique des décisions structurelles
+
+- **v0.1 (mai 2026)** : pipeline initiale avec évaluateur Incognito et triage informel.
+- **v0.2 (mai 2026)** : passage à des projets Claude dédiés (Évaluateur et Réviseur), introduction du format de triage structuré (`revision_v<x>_to_v<x+1>.md`).
+- **v0.3 (mai 2026)** : abandon de l'agent réviseur isolé. Coût d'utilisation trop élevé pour le gain marginal observé sur trois cycles. La révision passe en mode intégré dans la conversation principale, avec garde-fou « pas de modification hors triage ».
+- **v0.3 (mai 2026)** : abandon du seuil chiffré de 90/100. Données observées sur trois cycles (65 → 74 → 84) : courir après les derniers points conduit à de la sur-optimisation sans gain perçu. Le score reste indicateur, la validation devient qualitative.
+
+---
+
 ## Notes de production
 
-- Les seuils de score (≥ 90 pour validation, garde-fou à 3 itérations sans progrès) sont des points de départ. À recalibrer après quelques cycles complets.
-- Le passage à un projet d'évaluation dédié (au lieu d'Incognito ponctuel) sera utile une fois la grille bien stabilisée.
+- La grille `evaluation_rubric.md` reste générique. À enrichir avec des critères spécifiques à L'Abîme une fois plusieurs scènes écrites.
 - L'automatisation par routine Claude Code n'est intéressante qu'une fois le prompt d'évaluation gelé — sinon on brûle des quotas pour rien.
 - Ce document est lui-même susceptible d'évoluer ; le maintenir synchronisé avec la réalité de la pipeline.

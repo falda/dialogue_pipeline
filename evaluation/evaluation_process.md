@@ -9,8 +9,10 @@ Procédure d'évaluation des dialogues. Opérationnalise `evaluation_rubric.md`.
 Workflow solo + assistant IA :
 
 - **Auteur (Loïc)** — écrit les versions, prend les décisions finales d'acceptation ou de révision.
-- **Évaluateur IA (Claude)** — applique la grille `evaluation_rubric.md` à une version donnée et produit un rapport structuré.
+- **Évaluateur IA (Claude, projet dédié L'Abîme — Évaluateur)** — applique la grille `evaluation_rubric.md` à une version donnée et produit un rapport structuré.
 - **Validation finale** — l'auteur a le dernier mot. Le rapport IA est un input, pas une autorité.
+
+L'évaluateur fonctionne en isolation : projet Claude dédié, sans accès aux conversations précédentes, sans rapport antérieur attaché. Cette isolation garantit que chaque évaluation soit un regard neuf.
 
 ---
 
@@ -28,28 +30,44 @@ Workflow solo + assistant IA :
 
 ## Procédure
 
-1. **Préparer le contexte** — rassembler les inputs nécessaires :
-   - Le `.ink` à évaluer
-   - Le `scenario_*.md` correspondant
-   - `dialogue_style_guide.md`
-   - `world_rules.md`
-   - `world_lexicon.md`
-   - Fiches `/characters` des personnages présents
-   - Section pertinente de `player_experience.md`
-   - Section pertinente du GDD (si applicable)
-   - `evaluation_rubric.md`
+### 1. Préparer le contexte
 
-2. **Lancer l'évaluation** — demander à l'évaluateur IA d'appliquer la grille point par point en produisant le rapport au format défini ci-dessous.
+L'auteur ouvre une nouvelle conversation dans le projet Claude dédié **L'Abîme — Évaluateur**. Les référentiels suivants sont en knowledge du projet (cochés en permanence) :
 
-3. **Lire et trier les retours** — l'auteur classe les remarques :
-   - Critiques bloquantes (à corriger avant tout)
-   - Améliorations majeures (à intégrer dans la prochaine version)
-   - Améliorations mineures (à intégrer si compatible avec le scope)
-   - Remarques rejetées (avec brève justification, pour traçabilité)
+- `dialogue_style_guide.md`
+- `world_rules.md`
+- `world_lexicon.md`
+- `player_experience.md`
+- `ink_conventions.md`
+- `global.ink`
+- `evaluation_rubric.md`
+- `evaluation_process.md`
+- `protagonist.md`
 
-4. **Archiver le rapport** — dans `/evaluation/logs/` avec la convention de nommage définie plus bas.
+L'auteur attache à la conversation (en pièces jointes) :
 
-5. **Décider** — acceptation ou nouvelle version (voir règles de décision).
+- Le `.ink` à évaluer
+- Le `scenario_*.md` correspondant (si non en knowledge)
+- Les fiches des personnages présents dans la scène (si non en knowledge)
+
+Le prompt évaluateur (`prompt_evaluateur_pipeline.txt`) est en Project Instructions du projet.
+
+### 2. Lancer l'évaluation
+
+Message d'ouverture minimal : « Évalue. ». L'évaluateur applique sa procédure et produit le rapport au format défini ci-dessous.
+
+### 3. Lire et archiver
+
+L'auteur lit le rapport et l'archive dans `/evaluation/logs/` avec la convention de nommage définie plus bas.
+
+### 4. Décider
+
+L'auteur décide de la suite :
+
+- Si le rapport est propre (pas de Critical, Major acceptables) : passage à la relecture (étape 5 de la pipeline)
+- Sinon : ouverture d'un cycle de révision (voir `revision_process.md`)
+
+Pas de seuil chiffré : la décision est qualitative (cf. `pipeline_overview.md`, étape 4).
 
 ---
 
@@ -61,7 +79,7 @@ eval_<mission>_<scene>_<version>_<YYYY-MM-DD>.md
 
 Exemples :
 - `eval_mission1_scene1_v2_2026-05-11.md`
-- `eval_mission1_scene1_v3_2026-05-18.md`
+- `eval_mission1_scene1_v3_2026-05-16.md`
 
 Le suffixe de version dans le nom du log correspond à la version du `.ink` évaluée, pas à un compteur d'évaluations.
 
@@ -71,14 +89,15 @@ Le suffixe de version dans le nom du log correspond à la version du `.ink` éva
 
 Indicatives, pas mécaniques. L'auteur tranche.
 
-| Score global | Action recommandée |
-|--------------|---------------------|
-| < 60/100 | Réécriture majeure |
-| 60-74 | Révision ciblée sur les axes faibles |
-| 75-89 | Polish, ajustements mineurs, peut avancer |
-| ≥ 90 | Acceptation, peut avancer à la scène suivante |
+| Situation | Action recommandée |
+|-----------|---------------------|
+| Présence d'au moins une Critical Issue | Révision déclenchée, quel que soit le score |
+| Major Issues bloquantes du point de vue de l'auteur | Révision déclenchée |
+| Pas de Critical, Major acceptables | Acceptation possible, passage à la relecture |
+| Score qui régresse vs version précédente | Investigation : a-t-on cassé quelque chose ou la grille interprète-t-elle différemment ? |
+| Plafonnement sur 3 itérations sans progrès | Stop, résoudre la cause-racine (scénario, référentiel, grille) |
 
-**Override automatique** : la présence d'au moins une « Critical Issue » dans le rapport déclenche une révision, quel que soit le score global.
+Le **score global** est un indicateur de progression, non un critère de validation. Une scène à 80/100 sans Critical peut être livrée si l'auteur juge qu'aller plus loin produirait de la sur-optimisation.
 
 **Cas particulier** : un dialogue qui obtient un bon score mais qui rate l'intention émotionnelle de `player_experience.md` doit être révisé même si la grille est satisfaite. La cohérence avec l'expérience joueur prime.
 
@@ -93,7 +112,7 @@ Gabarit à utiliser pour chaque rapport archivé. Reprend la structure de `evalu
 
 **Date** : YYYY-MM-DD
 **Fichier évalué** : chemin/vers/le/fichier.ink
-**Évaluateur** : IA (Claude) / Auteur / Conjoint
+**Évaluateur** : IA (Claude, projet dédié)
 
 ---
 
@@ -149,10 +168,12 @@ Points réussis explicitement.
 Liste priorisée des améliorations.
 ```
 
+**Règle de localisation** : chaque issue (Critical, Major, Minor) doit indiquer son emplacement précis dans le `.ink` — nom du knot et/ou numéro de ligne — pour faciliter la relecture et le triage. Une issue sans localisation oblige l'auteur à parcourir tout le fichier pour la retrouver.
+
 ---
 
 ## Notes de production
 
 - Le seuil de 30% pour déclencher une évaluation (révision majeure) est arbitraire et peut être ajusté à l'usage.
-- Les seuils de score (60/75/90) sont des points de départ. À recalibrer après les 3-4 premières évaluations réelles.
-- Une fois quelques dialogues écrits et évalués, possibilité d'enrichir le rubric avec des critères spécifiques à L'Abîme (marqueurs mystiques, respect du tabou linguistique du Gouffre, distinction registre surface/faille...). Pour l'instant la grille générique suffit.
+- Les fourchettes de score sont des indicateurs, pas des seuils. La décision finale est qualitative.
+- Une fois plusieurs dialogues écrits et évalués, possibilité d'enrichir le rubric avec des critères spécifiques à L'Abîme (marqueurs mystiques, respect du tabou linguistique du Gouffre, distinction registre surface/faille...). Pour l'instant la grille générique suffit.

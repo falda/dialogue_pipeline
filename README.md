@@ -4,6 +4,8 @@ Cette pipeline structure l'écriture, la révision et l'évaluation des dialogue
 
 Le GDD (`GDD_Labime_v*.txt`) reste la source de vérité du jeu. La pipeline organise tout ce qui sert à écrire les dialogues à partir de ce GDD.
 
+Pour une vue d'ensemble du fonctionnement et des principes directeurs, voir `pipeline_overview.md`.
+
 ---
 
 ## Arborescence
@@ -33,18 +35,26 @@ Le GDD (`GDD_Labime_v*.txt`) reste la source de vérité du jeu. La pipeline org
 
 /evaluation                     système de revue des dialogues
   evaluation_rubric.md          grille de notation
-  evaluation_process.md         qui évalue, quand, comment archiver
-  /logs                         évaluations archivées (une par version révisée)
+  evaluation_process.md         procédure d'évaluation
+  revision_process.md           procédure de triage et de révision
+  /logs                         rapports d'évaluation archivés
+  /revisions                    triages et changelogs archivés
+
+prompt_evaluateur_pipeline.txt  prompt système du projet Claude Évaluateur
 ```
 
 ---
 
-## Boucle de travail
+## Boucle de travail (résumé)
 
 1. **Scénario** — rédiger ou mettre à jour `scenario_*.md` (intention, contraintes, état émotionnel attendu).
-2. **Écriture** — produire le `.ink` à partir du scénario, des fiches personnages concernées, des règles globales (`/global/*.md`) et des conventions Ink (`ink_conventions.md`).
-3. **Évaluation** — appliquer `evaluation_rubric.md`. Archiver le rapport dans `/evaluation/logs/`.
-4. **Itération** — version suivante intégrant les retours. Conserver l'ancienne version avec suffixe `_v2`, `_v3`, etc.
+2. **Écriture** — produire le `.ink` à partir du scénario, des fiches personnages, des règles globales et des conventions Ink.
+3. **Évaluation** — projet Claude dédié **L'Abîme — Évaluateur**. Rapport archivé dans `/evaluation/logs/`.
+4. **Triage + révision** — dans le projet principal, l'auteur trie les retours avec Claude qui produit ensuite la version suivante et le changelog. Archivé dans `/evaluation/revisions/`.
+5. **Itération** jusqu'à ce que l'auteur juge la scène suffisamment aboutie (pas de seuil chiffré, validation qualitative).
+6. **Relecture et validation** par l'auteur.
+
+Détails complets dans `pipeline_overview.md`.
 
 ---
 

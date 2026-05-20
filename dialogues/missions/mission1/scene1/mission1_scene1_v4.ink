@@ -1,4 +1,6 @@
 INCLUDE global.ink
+VAR player_name = ""
+VAR motivation = ""
 
 === Scene1 ===
 
@@ -157,7 +159,7 @@ FONCTIONNAIRE: Cette personne souhaite-t-elle réellement vous revoir ?
 
 FONCTIONNAIRE: La curiosité est un vilain défaut, Monsieur {player_name}.
 
-FONCTIONNAIRE: Qui sait jusqu'où elle vous emmenera.
+FONCTIONNAIRE: Qui sait jusqu'où elle vous emmènera.
 
 ->Fin_Interrogatoire
 
@@ -175,7 +177,7 @@ FONCTIONNAIRE: Mais vous vous dirigez pourtant dans l'endroit le plus dangereux 
 
 FONCTIONNAIRE: Quoi qu'il en soit, j'admire votre détermination.
 
-FONCTIONNAIRE: Mon rôle n'a jamais était d'interdire qui que ce soit d'aller là-bas. 
+FONCTIONNAIRE: Mon rôle n'a jamais été d'interdire qui que ce soit d'aller là-bas. 
 FONCTIONNAIRE: Je ne vois donc aucune raison de vous empêcher de descendre dans l'abîme.
 
 [Le fonctionnaire prend une note dans le dossier.]
